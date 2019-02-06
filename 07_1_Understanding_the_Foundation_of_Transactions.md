@@ -29,7 +29,7 @@ $ utxo_txid=$(bitcoin-cli listunspent | jq -r '.[0] | .txid')
 $ utxo_vout=$(bitcoin-cli listunspent | jq -r '.[0] | .vout')
 $ recipient=$(bitcoin-cli getrawchangeaddress)
 $ rawtxhex=$(bitcoin-cli -named createrawtransaction inputs='''[ { "txid": "'$utxo_txid'", "vout": '$utxo_vout' } ]''' outputs='''{ "'$recipient'": 1.2985 }''')
-$ signedtx=$(bitcoin-cli -named signrawtransaction hexstring=$rawtxhex | jq -r '.hex')
+$ signedtx=$(bitcoin-cli -named signrawtransactionwithwallet hexstring=$rawtxhex | jq -r '.hex')
 ```
 You don't actually need to send it: the goal is simply to produce a complete transaction that you can examine.
 
